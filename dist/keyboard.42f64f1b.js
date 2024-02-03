@@ -1,6 +1,6 @@
-let Option1
-let Option2
-let Option3
+let Option1 = "Loading.";
+let Option2 = "Loading..";
+let Option3 = "Loading...";
 let reply1, reply2, reply3;
 let reloadingAns = false;
 parcelRequire = (function (e, r, t, n) {
@@ -55416,15 +55416,15 @@ parcelRequire = (function (e, r, t, n) {
           const optionElements = document.getElementsByClassName("reply");
           // Assuming there are at least three elements with the class "reply" in your HTML
           if (optionElements.length) {
-            if (optionElements[0].innerText.includes("Loading")) {
+            if (optionElements[0].innerText === "Loading.") {
               optionElements[0].innerText = reply1;
               Option1 = reply1;
             }
-            if (optionElements[1].innerText.includes("Loading")) {
+            if (optionElements[1].innerText === "Loading..") {
               optionElements[1].innerText = reply2;
               Option1 = reply1;
             }
-            if (optionElements[2].innerText.includes("Loading")) {
+            if (optionElements[2].innerText === "Loading...") {
               optionElements[2].innerText = reply3;
               Option3 = reply1;
             }
@@ -55554,11 +55554,18 @@ parcelRequire = (function (e, r, t, n) {
                   ? (n.value += " ")
                   : "Enter" === e[0]
                   ? (n.value = `${n.value}\n`)
-                  : (n.value += e[0]),
+                  // : (n.value += e[0]),
+                  : e[0]==="Loading."
+                  ? (n.value +=reply1)
+                  : e[0]==="Loading.."
+                  ? (n.value +=reply2)
+                  : e[0]==="Loading..."
+                  ? (n.value +=reply3)
+                  :
 
                   
-                    console.log(n.value),
-                    console.log(e[0]),
+                    // console.log(n.value),
+                    // console.log(e[0]),
                    //--------------------------------------------------------------------
                 s(t.initialLetters, !1),
                 void o()
