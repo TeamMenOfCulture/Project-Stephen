@@ -1,8 +1,3 @@
-let Option1 = "Loading.";
-let Option2 = "Loading..";
-let Option3 = "Loading...";
-let reply1, reply2, reply3;
-let reloadingAns = false;
 parcelRequire = (function (e, r, t, n) {
   var i,
     o = "function" == typeof parcelRequire && parcelRequire,
@@ -2120,8 +2115,6 @@ parcelRequire = (function (e, r, t, n) {
           for (let a = t.length - 1; a >= 0; a--) {
             const e = t[a],
               n = e.inputs;
-              console.log(outputs)
-              console.log(outputs.length)
             for (let t = 0; t < e.outputs.length; t++)
               if (i[e.outputs[t].id]) {
                 for (const t in n) (i[n[t].id] = !0), (s[e.id] = !0);
@@ -22611,14 +22604,18 @@ parcelRequire = (function (e, r, t, n) {
           }
           async setWeights(a) {
             const e = (a = await this.extractIterations(a)).length / 2;
-            (this.accumulatedGrads = a.slice(0, e).map((a) => ({
-              originalName: a.name,
-              variable: a.tensor.variable(!1),
-            }))),
-              (this.accumulatedUpdates = a.slice(e, 2 * e).map((a) => ({
+            (this.accumulatedGrads = a
+              .slice(0, e)
+              .map((a) => ({
                 originalName: a.name,
                 variable: a.tensor.variable(!1),
-              })));
+              }))),
+              (this.accumulatedUpdates = a
+                .slice(e, 2 * e)
+                .map((a) => ({
+                  originalName: a.name,
+                  variable: a.tensor.variable(!1),
+                })));
           }
           getConfig() {
             return {
@@ -22869,14 +22866,18 @@ parcelRequire = (function (e, r, t, n) {
                   );
               });
             const a = e.length / 2;
-            (this.accumulatedFirstMoment = e.slice(0, a).map((e) => ({
-              originalName: e.name,
-              variable: e.tensor.variable(!1),
-            }))),
-              (this.accumulatedSecondMoment = e.slice(a, 2 * a).map((e) => ({
+            (this.accumulatedFirstMoment = e
+              .slice(0, a)
+              .map((e) => ({
                 originalName: e.name,
                 variable: e.tensor.variable(!1),
-              })));
+              }))),
+              (this.accumulatedSecondMoment = e
+                .slice(a, 2 * a)
+                .map((e) => ({
+                  originalName: e.name,
+                  variable: e.tensor.variable(!1),
+                })));
           }
           getConfig() {
             return {
@@ -23349,19 +23350,25 @@ parcelRequire = (function (e, r, t, n) {
           async setWeights(e) {
             e = await this.extractIterations(e);
             const a = this.centered ? e.length / 3 : e.length / 2;
-            (this.accumulatedMeanSquares = e.slice(0, a).map((e) => ({
-              originalName: e.name,
-              variable: e.tensor.variable(!1),
-            }))),
-              (this.accumulatedMoments = e.slice(a, 2 * a).map((e) => ({
+            (this.accumulatedMeanSquares = e
+              .slice(0, a)
+              .map((e) => ({
                 originalName: e.name,
                 variable: e.tensor.variable(!1),
               }))),
-              this.centered &&
-                (this.accumulatedMeanGrads = e.slice(2 * a, 3 * a).map((e) => ({
+              (this.accumulatedMoments = e
+                .slice(a, 2 * a)
+                .map((e) => ({
                   originalName: e.name,
                   variable: e.tensor.variable(!1),
-                })));
+                }))),
+              this.centered &&
+                (this.accumulatedMeanGrads = e
+                  .slice(2 * a, 3 * a)
+                  .map((e) => ({
+                    originalName: e.name,
+                    variable: e.tensor.variable(!1),
+                  })));
           }
           getConfig() {
             return {
@@ -55381,7 +55388,6 @@ parcelRequire = (function (e, r, t, n) {
         "@tensorflow/tfjs-backend-webgl": "CRrf",
       },
     ],
-    // ------------------------------------------------------------------------------------------------------------------------------------
     FOZT: [
       function (require, module, exports) {
         "use strict";
@@ -55394,123 +55400,43 @@ parcelRequire = (function (e, r, t, n) {
             exports.commands =
             exports.initialLetters =
               void 0);
-
-        // ----------------------------------------------------------------------------------------------
-
-        document.addEventListener("DOMContentLoaded", function () {
-          const generateButton = document.querySelector(".genButton");
-
-          generateButton.addEventListener("click", generateContent);
-        });
-        let e = [
-          `${Option1}`,
-          `${Option2}`,
-          `${Option3}`,
-          "Regenerate",
-          "Type Your Own",
-          "Read Harry Potter",
-          "Read Demon Slayer",
+        const e = [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "Y",
+          "Z",
           "Delete",
           "space",
           "Enter",
+          "Exit",
         ];
-        async function updateOptions(reply1, reply2, reply3) {
-          const optionElements = document.getElementsByClassName("reply");
-          // Assuming there are at least three elements with the class "reply" in your HTML
-          if (optionElements.length) {
-            console.log(optionElements[0].innerText)
-            console.log(optionElements[1].innerText)
-            if (optionElements[0].innerText === "Loading.") {
-              optionElements[0].innerText = reply1;
-              Option1 = reply1;
-            }
-            if (optionElements[1].innerText === "Loading..") {
-              optionElements[1].innerText = reply2;
-              Option1 = reply1;
-            }
-            if (optionElements[2].innerText === "Loading...") {
-              optionElements[2].innerText = reply3;
-              Option3 = reply1;
-            }
-            // optionElements[1].innerText = reply2;
-            // Option2 = reply2;
-            // optionElements[2].innerText = reply3;
-            // Option3 = reply3;
-          }
-
-        }
-
-        async function generateContent() {
-          const prompt = document.getElementById("prompt").textContent;
-          console.log(prompt);
-          try {
-            const response = await fetch("http://localhost:8080/generate", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ prompt }),
-            });
-
-            const result = await response.text();
-
-            const apostrophePositions = [];
-            for (let i = 0; i < result.length; i++) {
-              if (result[i] === "'") {
-                apostrophePositions.push(i);
-              }
-            }
-
-            // Extract replies based on apostrophe positions
-            reply1 = result.substring(
-              apostrophePositions[0] + 1,
-              apostrophePositions[1]
-            );
-            reply2 = result.substring(
-              apostrophePositions[2] + 1,
-              apostrophePositions[3]
-            );
-            reply3 = result.substring(
-              apostrophePositions[4] + 1,
-              apostrophePositions[5]
-            );
-
-            console.log(reply1);
-            console.log(reply2);
-            console.log(reply3);
-            reloadingAns = true;
-            // let replies[] = {reply1, reply2, reply3}
-            // document.getElementById("answer").innerText = result;
-            // document.getElementById("answer1").innerText = reply1;
-            // document.getElementById("answer2").innerText = reply2;
-            // document.getElementById("answer3").innerText = reply3;
-
-            // Update options after the fetch operation is complete
-            Option1 = reply1;
-            Option2 = reply2;
-            Option3 = reply3;
-            await updateOptions(reply1, reply2, reply3);
-
-            // Now you can use the updated options as needed
-          } catch (error) {
-            console.error(error);
-            document.getElementById("answer").innerText = "Error occurred";
-          }
-        }
-        // Set interval to update options every 3 seconds
-        setInterval(async () => {
-          if (reloadingAns) {
-            await updateOptions(reply1, reply2, reply3);
-          }
-        }, 3000);
-        // ----------------------------------------------------------------------------------------------
-        let pElementNum = 1;
         exports.initialLetters = e;
         const t = ["Delete", "Space", "Enter"];
         exports.commands = t;
         const s = 500;
         exports.VIDEO_SIZE = 500;
-
         const o = () => {
             const e = /Android/i.test(navigator.userAgent),
               t = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -55540,20 +55466,6 @@ parcelRequire = (function (e, r, t, n) {
         function n(e) {
           return e && e.__esModule ? e : { default: e };
         }
-        // ---------------------------------------------------------------------
-        function loadHarryPotter() {
-          var url = '../pdfReader/sample/harry.html';
-          window.location.href = url;
-      }
-        function LoadDemonSlayer() {
-          var url = '../pdfReader/sample/kimetsu.html';
-          window.location.href = url;
-      }
-        function LoadKeyboard() {
-          console.log("Type your own initiated")
-          var url = '../KeyBoard/index.html';
-          window.location.href = url;
-      }
         let a = t.initialLetters;
         const l = document.querySelector(".section-left"),
           i = document.querySelector(".section-right"),
@@ -55571,34 +55483,15 @@ parcelRequire = (function (e, r, t, n) {
                   ? (n.value += " ")
                   : "Enter" === e[0]
                   ? (n.value = `${n.value}\n`)
-                  // : (n.value += e[0]),
-                  : e[0]==="Loading."
-                  ? (n.value =reply1)
-                  : e[0]==="Loading.."
-                  ? (n.value =reply2)
-                  : e[0]==="Loading..."
-                  ? (n.value =reply3)
-                  : e[0]==="Read Harry Potter"
-                  ? (loadHarryPotter())
-                  : e[0]==="Read Demon Slayer"
-                  ? (LoadDemonSlayer())
-                  : e[0]==="Regenerate"
-                  ? (generateContent())
-                  : e[0]==="Type Your Own"
-                  ? (LoadKeyboard())
-                  : 
-
-                  
-                    // console.log(n.value),
-                    // console.log(e[0]),
-                   //--------------------------------------------------------------------
+                  : "Exit" === e[0]
+                  ? (window.history.back())
+                  : (n.value += e[0]),
                 s(t.initialLetters, !1),
                 void o()
               );
             }
             e.map((t, n) => {
               const a = document.createElement("p");
-              a.classList.add(`reply`);
               (a.innerHTML = t),
                 n < Math.round(e.length / 2)
                   ? l.appendChild(a)
@@ -55645,3 +55538,4 @@ parcelRequire = (function (e, r, t, n) {
   ["Focm"],
   null
 );
+//# sourceMappingURL=keyboard.42f64f1b.js.map

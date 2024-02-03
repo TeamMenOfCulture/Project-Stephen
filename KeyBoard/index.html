@@ -1,0 +1,39 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Write words using your eye movements. Built with Tensorflow.js">
+    <meta property="og:description" content="Write words using your eye movements. Built with Tensorflow.js">
+    <meta property="twitter:description" content="Write words using your eye movements. Built with Tensorflow.js">
+    <meta property="og:image"
+        content="https://res.cloudinary.com/devdevcharlie/image/upload/v1612225468/Screenshot_2021-02-02_at_01.18.18_dcpjpo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Eye-controlled keyboard</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.64474a6f.css">
+</head>
+
+<body>
+    <h1>Eye-controlled keyboard</h1>
+    <section class="info">
+        <p class="instruction"> Look left or right to filter down the letter/command you would like to select. </p>
+        <p class="model-status">Machine learning model loading...</p>
+    </section>
+    <main>
+        <div id="main"> <video id="video" playsinline=""
+                style="-webkit-transform:scaleX(-1);transform:scaleX(-1);visibility:hidden;width:auto;height:auto;display:none;"></video>
+            <section class="keyboard"> <textarea class="output" placeholder="Type a message with your eyes..." cols="30"
+                    rows="1"></textarea>
+                <section class="letters">
+                    <section class="section-left"></section>
+                    <section class="section-right"></section>
+                </section>
+            </section>
+        </div>
+    </main>
+    <script src="keyboard.42f64f1b.js"></script>
+</body>
+
+</html>
