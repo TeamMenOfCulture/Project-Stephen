@@ -22,17 +22,24 @@
         <div class="instruction"> Look left or right to filter down the letter/command you would like to select. </div>
         <div class="model-status">Machine learning model loading...</div>
     </section>
-    <main>
-        <div>
+    <main style="display: flex;flex-direction: column;">
+        <div class="AIgenPanel">
             <label for="prompt">Enter your prompt:</label>
-            <input type="text" id="prompt" name="prompt">
+            <input type="text" class="prompt" id="prompt" name="prompt">
             <button class="genButton">Generate</button>
+            <span class="prom" id="prom"></span>
+
             <!-- <span id="answer">Generated content will appear here</span>
             <span id="answer1"></span>
             <span id="answer2"></span>
             <span id="answer3"></span> -->
 
         </div>
+        <div class="SpeechToText">
+            <div class="texts"></div>
+            <button id="btn1">Start Speech Recognition</button>
+            <button id="btn2">Stop Speech Recognition</button>
+          </div>
         <div id="main"> <video id="video" playsinline=""
                 style="-webkit-transform:scaleX(-1);transform:scaleX(-1);visibility:hidden;width:auto;height:auto;display:none;"></video>
             <section class="keyboard"> <textarea class="output" placeholder="Type a message with your eyes..." cols="30"
@@ -46,7 +53,27 @@
     </main>
     <script src="keyboard.42f64f1b.js"></script>
     <script>
-      
+        // Your JavaScript code goes here
+        const promptContainer = document.querySelector(".prom");
+        const button1 = document.querySelector("#btn1");
+        const button2 = document.querySelector("#btn2");
+
+        window.SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+
+        recognition.addEventListener("result", (e) => {
+            const text = Array.from(e.results)
+                .map((result) => result[0])
+                .map((result) => result.transcript)
+                .join("");
+
+            // Update the content of the promptContainer with the spoken text
+            promptContainer.textContent = text;
+        });
+
+        recognition.start();
     </script>
 </body>
 
