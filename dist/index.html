@@ -29,6 +29,11 @@
             <p class="prompt" id="prompt"></p>
             <button class="genButton">Generate</button>
 
+            <!-- <span id="answer">Generated content will appear here</span>
+            <span id="answer1"></span>
+            <span id="answer2"></span>
+            <span id="answer3"></span> -->
+
         </div>
         <div class="SpeechToText">
             <div class="texts"></div>
@@ -36,7 +41,7 @@
             <button id="btn2">Stop Speech Recognition</button>
           </div>
         <div id="main"> <video id="video" playsinline=""
-                style="-webkit-transform:scaleX(-1);transform:scaleX(-1);visibility:hidden;width:auto;height:auto;display:none;"></video>
+                style="-webkit-transform:scaleX(-1);transform:scaleX(-1);visibility:visible;width:auto;height:auto;display:none;"></video>
             <section class="keyboard"> <textarea class="output" placeholder="Type a message with your eyes..." cols="30"
                     rows="1"></textarea>
                 <section class="letters">
@@ -65,6 +70,7 @@
                 .join("");
 
             // Update the content of the promptContainer with the spoken text
+            console.log(text)
             promptContainer.textContent = text;
         });
 
