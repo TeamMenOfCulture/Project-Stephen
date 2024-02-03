@@ -2120,8 +2120,8 @@ parcelRequire = (function (e, r, t, n) {
           for (let a = t.length - 1; a >= 0; a--) {
             const e = t[a],
               n = e.inputs;
-              console.log(outputs)
-              console.log(outputs.length)
+            console.log(outputs);
+            console.log(outputs.length);
             for (let t = 0; t < e.outputs.length; t++)
               if (i[e.outputs[t].id]) {
                 for (const t in n) (i[n[t].id] = !0), (s[e.id] = !0);
@@ -55418,8 +55418,8 @@ parcelRequire = (function (e, r, t, n) {
           const optionElements = document.getElementsByClassName("reply");
           // Assuming there are at least three elements with the class "reply" in your HTML
           if (optionElements.length) {
-            console.log(optionElements[0].innerText)
-            console.log(optionElements[1].innerText)
+            console.log(optionElements[0].innerText);
+            console.log(optionElements[1].innerText);
             if (optionElements[0].innerText === "Loading.") {
               optionElements[0].innerText = reply1;
               Option1 = reply1;
@@ -55437,9 +55437,37 @@ parcelRequire = (function (e, r, t, n) {
             // optionElements[2].innerText = reply3;
             // Option3 = reply3;
           }
-
         }
+        const SpeechSynthesisUtterance =
+          window.webkitSpeechSynthesisUtterance ||
+          window.mozSpeechSynthesisUtterance ||
+          window.msSpeechSynthesisUtterance ||
+          window.oSpeechSynthesisUtterance ||
+          window.SpeechSynthesisUtterance;
+        const form = document.querySelector("form"),
+          voiceSelect = document.getElementById("voiceSelect"),
+          voiceInput = document.querySelector(".output");
+        let voices;
+        console.log(voiceSelect);
 
+        if (SpeechSynthesisUtterance !== undefined) {
+          window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            voices.forEach((voice, key) => {
+              let option = document.createElement("option");
+              option.textContent = voice.name + " (" + voice.lang + ")";
+              option.value = key;
+              voiceSelect.appendChild(option);
+            });
+          };
+        }
+        form.onsubmit = function (event) {
+          event.preventDefault();
+
+          let speak = new SpeechSynthesisUtterance(voiceInput.value);
+          speak.voice = voices[voiceSelect.value];
+          window.speechSynthesis.speak(speak);
+        };
         async function generateContent() {
           const prompt = document.getElementById("prompt").textContent;
           console.log(prompt);
@@ -55542,18 +55570,18 @@ parcelRequire = (function (e, r, t, n) {
         }
         // ---------------------------------------------------------------------
         function loadHarryPotter() {
-          var url = '../pdfReader/sample/harry.html';
+          var url = "../pdfReader/sample/harry.html";
           window.location.href = url;
-      }
+        }
         function LoadDemonSlayer() {
-          var url = '../pdfReader/sample/kimetsu.html';
+          var url = "../pdfReader/sample/kimetsu.html";
           window.location.href = url;
-      }
+        }
         function LoadKeyboard() {
-          console.log("Type your own initiated")
-          var url = '../KeyBoard/index.html';
+          console.log("Type your own initiated");
+          var url = "../KeyBoard/index.html";
           window.location.href = url;
-      }
+        }
         let a = t.initialLetters;
         const l = document.querySelector(".section-left"),
           i = document.querySelector(".section-right"),
@@ -55571,28 +55599,25 @@ parcelRequire = (function (e, r, t, n) {
                   ? (n.value += " ")
                   : "Enter" === e[0]
                   ? (n.value = `${n.value}\n`)
-                  // : (n.value += e[0]),
-                  : e[0]==="Loading."
-                  ? (n.value =reply1)
-                  : e[0]==="Loading.."
-                  ? (n.value =reply2)
-                  : e[0]==="Loading..."
-                  ? (n.value =reply3)
-                  : e[0]==="Read Harry Potter"
-                  ? (loadHarryPotter())
-                  : e[0]==="Read Demon Slayer"
-                  ? (LoadDemonSlayer())
-                  // : e[0]==="Regenerate"
+                  : // : (n.value += e[0]),
+                  e[0] === "Loading."
+                  ? (n.value = reply1)
+                  : e[0] === "Loading.."
+                  ? (n.value = reply2)
+                  : e[0] === "Loading..."
+                  ? (n.value = reply3)
+                  : e[0] === "Read Harry Potter"
+                  ? loadHarryPotter()
+                  : e[0] === "Read Demon Slayer"
+                  ? LoadDemonSlayer()
+                  : // : e[0]==="Regenerate"
                   // ? (generateContent())
-                  : e[0]==="Type Your Own"
-                  ? (LoadKeyboard())
-                  : 
-
-                  
-                    // console.log(n.value),
+                  e[0] === "Type Your Own"
+                  ? LoadKeyboard()
+                  : // console.log(n.value),
                     // console.log(e[0]),
-                   //--------------------------------------------------------------------
-                s(t.initialLetters, !1),
+                    //--------------------------------------------------------------------
+                    s(t.initialLetters, !1),
                 void o()
               );
             }
