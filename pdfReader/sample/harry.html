@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!-- Unseen by user -->
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>EyeBook Reader</title>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <!-- Import GazeCloud API for eye tracking -->
+    <script src="https://api.gazerecorder.com/GazeCloudAPI.js"></script>
+
+    <!-- Import the webpage's javascript file -->
+    <script src="../script.js" defer></script>
+
+    <!-- Import Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Alter the width based on screen size for responsiveness -->
+    <style>
+        
+    </style>
+
+</head>
+
+<!-- Visible to the user -->
+
+    <!-- Circle drawn over where we look for demonstration purposes -->
+    <canvas id="circle" width="100%" height="100%"></canvas>
+
+    <div class = "pdfView">
+        <iframe src="harry.pdf" id="iframe" height="15000" width="100%"></iframe>
+    </div>
+    
+    
+    <!---------- FOOTER COMPONENT ---------->
+    <footer class="footer">
+        <!-- Insert footer here -->
+    </footer>
+</body>
+
+</html>

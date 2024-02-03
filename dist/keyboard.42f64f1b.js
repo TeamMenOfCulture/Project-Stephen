@@ -55407,7 +55407,9 @@ parcelRequire = (function (e, r, t, n) {
           `${Option2}`,
           `${Option3}`,
           "Regenerate",
-          "pdfReader",
+          "Type Your Own",
+          "Read Harry Potter",
+          "Read Demon Slayer",
           "Delete",
           "space",
           "Enter",
@@ -55537,6 +55539,14 @@ parcelRequire = (function (e, r, t, n) {
           return e && e.__esModule ? e : { default: e };
         }
         // ---------------------------------------------------------------------
+        function loadHarryPotter() {
+          var url = '../pdfReader/sample/harry.html';
+          window.location.href = url;
+      }
+        function LoadDemonSlayer() {
+          var url = '../pdfReader/sample/kimetsu.html';
+          window.location.href = url;
+      }
         let a = t.initialLetters;
         const l = document.querySelector(".section-left"),
           i = document.querySelector(".section-right"),
@@ -55556,12 +55566,20 @@ parcelRequire = (function (e, r, t, n) {
                   ? (n.value = `${n.value}\n`)
                   // : (n.value += e[0]),
                   : e[0]==="Loading."
-                  ? (n.value +=reply1)
+                  ? (n.value =reply1)
                   : e[0]==="Loading.."
-                  ? (n.value +=reply2)
+                  ? (n.value =reply2)
                   : e[0]==="Loading..."
-                  ? (n.value +=reply3)
-                  :
+                  ? (n.value =reply3)
+                  : e[0]==="Read Harry Potter"
+                  ? (loadHarryPotter())
+                  : e[0]==="Read Demon Slayer"
+                  ? (LoadDemonSlayer())
+                  : e[0]==="Regenerate"
+                  ? (generateContent())
+                  : e[0]==="Type Your Own"
+                  ? ()
+                  : 
 
                   
                     // console.log(n.value),
