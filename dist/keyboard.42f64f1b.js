@@ -55406,13 +55406,13 @@ parcelRequire = (function (e, r, t, n) {
           `${Option1}`,
           `${Option2}`,
           `${Option3}`,
-          "Regenerate",
+          // "Regenerate",
           "Type Your Own",
           "Read Harry Potter",
           "Read Demon Slayer",
-          "Delete",
-          "space",
-          "Enter",
+          // "Delete",
+          // "space",
+          // "Enter",
         ];
         async function updateOptions(reply1, reply2, reply3) {
           const optionElements = document.getElementsByClassName("reply");
@@ -55582,8 +55582,8 @@ parcelRequire = (function (e, r, t, n) {
                   ? (loadHarryPotter())
                   : e[0]==="Read Demon Slayer"
                   ? (LoadDemonSlayer())
-                  : e[0]==="Regenerate"
-                  ? (generateContent())
+                  // : e[0]==="Regenerate"
+                  // ? (generateContent())
                   : e[0]==="Type Your Own"
                   ? (LoadKeyboard())
                   : 

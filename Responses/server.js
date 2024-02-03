@@ -19,7 +19,9 @@ async function run(prompt) {
   try {
     const result = await model.generateContent(initialText + prompt);
     const response = await result.response;
+    console.log(response)
     const text = await response.text(); // Await here
+    console.log(text)
     return text;
   } catch (error) {
     return "404 Not Found";
