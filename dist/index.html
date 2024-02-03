@@ -24,15 +24,10 @@
     </section>
     <main style="display: flex;flex-direction: column;">
         <div class="AIgenPanel">
-            <label for="prompt">Enter your prompt:</label>
-            <input type="text" class="prompt" id="prompt" name="prompt">
+            <!-- <label for="prompt">Enter your prompt:</label> -->
+            <!-- <input type="text" class="prompt" id="prompt" name="prompt"> -->
+            <p class="prompt" id="prompt"></p>
             <button class="genButton">Generate</button>
-            <span class="prom" id="prom"></span>
-
-            <!-- <span id="answer">Generated content will appear here</span>
-            <span id="answer1"></span>
-            <span id="answer2"></span>
-            <span id="answer3"></span> -->
 
         </div>
         <div class="SpeechToText">
@@ -54,7 +49,7 @@
     <script src="keyboard.42f64f1b.js"></script>
     <script>
         // Your JavaScript code goes here
-        const promptContainer = document.querySelector(".prom");
+        const promptContainer = document.querySelector(".prompt");
         const button1 = document.querySelector("#btn1");
         const button2 = document.querySelector("#btn2");
 

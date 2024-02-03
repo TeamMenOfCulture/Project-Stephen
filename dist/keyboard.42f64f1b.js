@@ -55446,7 +55446,7 @@ parcelRequire = (function (e, r, t, n) {
         }
 
         async function generateContent() {
-          const prompt = document.getElementById("prompt").value;
+          const prompt = document.getElementById("prompt").textContent;
           console.log(prompt);
           try {
             const response = await fetch("http://localhost:8080/generate", {
