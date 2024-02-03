@@ -1,3 +1,8 @@
+let Option1 = "Loading.";
+let Option2 = "Loading..";
+let Option3 = "Loading...";
+let reply1, reply2, reply3;
+let reloadingAns = false;
 parcelRequire = (function (e, r, t, n) {
   var i,
     o = "function" == typeof parcelRequire && parcelRequire,
@@ -55389,9 +55394,12 @@ parcelRequire = (function (e, r, t, n) {
               void 0);
 
         // ----------------------------------------------------------------------------------------------
-        let Option1 = "Loading.";
-        let Option2 = "Loading..";
-        let Option3 = "Loading...";
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const generateButton = document.querySelector(".genButton");
+
+          generateButton.addEventListener("click", generateContent);
+        });
         let e = [
           `${Option1}`,
           `${Option2}`,
@@ -55402,20 +55410,39 @@ parcelRequire = (function (e, r, t, n) {
           "space",
           "Enter",
         ];
-        document.addEventListener("DOMContentLoaded", function () {
-          const generateButton = document.querySelector(".genButton");
-
-          generateButton.addEventListener("click", generateContent);
-        });
         async function updateOptions(reply1, reply2, reply3) {
           const optionElements = document.getElementsByClassName("reply");
           // Assuming there are at least three elements with the class "reply" in your HTML
-          if (optionElements.length >= 3) {
-            optionElements[0].innerText = reply1;
-            optionElements[1].innerText = reply2;
-            optionElements[2].innerText = reply3;
+          if (optionElements.length) {
+            if (optionElements[0].innerText.includes("Loading")) {
+              optionElements[0].innerText = reply1;
+              Option1 = reply1;
+            }
+            if (optionElements[1].innerText.includes("Loading")) {
+              optionElements[1].innerText = reply2;
+              Option1 = reply1;
+            }
+            if (optionElements[2].innerText.includes("Loading")) {
+              optionElements[2].innerText = reply3;
+              Option3 = reply1;
+            }
+            // optionElements[1].innerText = reply2;
+            // Option2 = reply2;
+            // optionElements[2].innerText = reply3;
+            // Option3 = reply3;
           }
-          console.log(optionElements[0], optionElements[1], optionElements[2]);
+          console.log(
+            "yooooooooooooooooooooooooooooiiiiio",
+            optionElements[0],
+            optionElements[1],
+            optionElements[2]
+          );
+          console.log(
+            "yooooooooooooooooooooooooooooo",
+            Option1,
+            Option2,
+            Option3
+          );
         }
 
         async function generateContent() {
@@ -55442,15 +55469,15 @@ parcelRequire = (function (e, r, t, n) {
             }
 
             // Extract replies based on apostrophe positions
-            let reply1 = result.substring(
+            reply1 = result.substring(
               apostrophePositions[0] + 1,
               apostrophePositions[1]
             );
-            let reply2 = result.substring(
+            reply2 = result.substring(
               apostrophePositions[2] + 1,
               apostrophePositions[3]
             );
-            let reply3 = result.substring(
+            reply3 = result.substring(
               apostrophePositions[4] + 1,
               apostrophePositions[5]
             );
@@ -55458,7 +55485,7 @@ parcelRequire = (function (e, r, t, n) {
             console.log(reply1);
             console.log(reply2);
             console.log(reply3);
-
+            reloadingAns = true;
             // let replies[] = {reply1, reply2, reply3}
             // document.getElementById("answer").innerText = result;
             // document.getElementById("answer1").innerText = reply1;
@@ -55466,9 +55493,9 @@ parcelRequire = (function (e, r, t, n) {
             // document.getElementById("answer3").innerText = reply3;
 
             // Update options after the fetch operation is complete
-            // Option1 = reply1;
-            // Option2 = reply2;
-            // Option3 = reply3;
+            Option1 = reply1;
+            Option2 = reply2;
+            Option3 = reply3;
             await updateOptions(reply1, reply2, reply3);
 
             // Now you can use the updated options as needed
@@ -55478,14 +55505,20 @@ parcelRequire = (function (e, r, t, n) {
             document.getElementById("answer").innerText = "Error occurred";
           }
         }
-
+        // Set interval to update options every 3 seconds
+        setInterval(async () => {
+          if (reloadingAns) {
+            await updateOptions(reply1, reply2, reply3);
+          }
+        }, 3000);
         // ----------------------------------------------------------------------------------------------
-
+        let pElementNum = 1;
         exports.initialLetters = e;
         const t = ["Delete", "Space", "Enter"];
         exports.commands = t;
         const s = 500;
         exports.VIDEO_SIZE = 500;
+
         const o = () => {
             const e = /Android/i.test(navigator.userAgent),
               t = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -55539,7 +55572,7 @@ parcelRequire = (function (e, r, t, n) {
             }
             e.map((t, n) => {
               const a = document.createElement("p");
-              a.classList.add("reply");
+              a.classList.add(`reply`);
               (a.innerHTML = t),
                 n < Math.round(e.length / 2)
                   ? l.appendChild(a)
