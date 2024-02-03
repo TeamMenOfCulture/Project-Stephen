@@ -1,6 +1,6 @@
-let Option1 = "Loading.";
-let Option2 = "Loading..";
-let Option3 = "Loading...";
+let Option1
+let Option2
+let Option3
 let reply1, reply2, reply3;
 let reloadingAns = false;
 parcelRequire = (function (e, r, t, n) {
@@ -2120,6 +2120,8 @@ parcelRequire = (function (e, r, t, n) {
           for (let a = t.length - 1; a >= 0; a--) {
             const e = t[a],
               n = e.inputs;
+              console.log(outputs)
+              console.log(outputs.length)
             for (let t = 0; t < e.outputs.length; t++)
               if (i[e.outputs[t].id]) {
                 for (const t in n) (i[n[t].id] = !0), (s[e.id] = !0);
@@ -55431,18 +55433,7 @@ parcelRequire = (function (e, r, t, n) {
             // optionElements[2].innerText = reply3;
             // Option3 = reply3;
           }
-          console.log(
-            "yooooooooooooooooooooooooooooiiiiio",
-            optionElements[0],
-            optionElements[1],
-            optionElements[2]
-          );
-          console.log(
-            "yooooooooooooooooooooooooooooo",
-            Option1,
-            Option2,
-            Option3
-          );
+
         }
 
         async function generateContent() {
@@ -55457,9 +55448,7 @@ parcelRequire = (function (e, r, t, n) {
               body: JSON.stringify({ prompt }),
             });
 
-            console.log(response);
             const result = await response.text();
-            console.log(result);
 
             const apostrophePositions = [];
             for (let i = 0; i < result.length; i++) {
@@ -55499,7 +55488,6 @@ parcelRequire = (function (e, r, t, n) {
             await updateOptions(reply1, reply2, reply3);
 
             // Now you can use the updated options as needed
-            console.log(Option1, Option2, Option3);
           } catch (error) {
             console.error(error);
             document.getElementById("answer").innerText = "Error occurred";
@@ -55548,6 +55536,7 @@ parcelRequire = (function (e, r, t, n) {
         function n(e) {
           return e && e.__esModule ? e : { default: e };
         }
+        // ---------------------------------------------------------------------
         let a = t.initialLetters;
         const l = document.querySelector(".section-left"),
           i = document.querySelector(".section-right"),
@@ -55566,6 +55555,11 @@ parcelRequire = (function (e, r, t, n) {
                   : "Enter" === e[0]
                   ? (n.value = `${n.value}\n`)
                   : (n.value += e[0]),
+
+                  
+                    console.log(n.value),
+                    console.log(e[0]),
+                   //--------------------------------------------------------------------
                 s(t.initialLetters, !1),
                 void o()
               );
