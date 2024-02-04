@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <h1>Project Stephen</h1>
+    <h1>Project <span id="title">Stephen</span></h1>
     <section class="info">
       <div class="instruction">
         Look left or right to filter down the letter/command you would like to
@@ -38,10 +38,10 @@
       <div class="model-status">Machine learning model loading...</div>
     </section>
     <main style="display: flex; flex-direction: column">
-      <div class="AIgenPanel">
+      <p class="prompt" id="prompt"></p>
+      <div class="AIgenPanel" style="display: none">
         <!-- <label for="prompt">Enter your prompt:</label> -->
         <!-- <input type="text" class="prompt" id="prompt" name="prompt"> -->
-        <p class="prompt" id="prompt"></p>
         <button class="genButton">Generate</button>
 
         <!-- <span id="answer">Generated content will appear here</span>
@@ -49,11 +49,11 @@
             <span id="answer2"></span>
             <span id="answer3"></span> -->
       </div>
-      <div class="SpeechToText">
-        <div class="texts"></div>
+      <div class="texts"></div>
+      <!-- <div class="SpeechToText">
         <button id="btn1">Start Speech Recognition</button>
         <button id="btn2">Stop Speech Recognition</button>
-      </div>
+      </div> -->
       <div id="main">
         <video
           id="video"
@@ -73,22 +73,27 @@
             placeholder="Type a message with your eyes..."
             cols="30"
             rows="1"
+            style="border-radius: 10px 10px 0px 0px"
           ></textarea>
           <section class="letters">
-            <section class="section-left"></section>
-            <section class="section-right"></section>
+            <section
+              class="section-left"
+              style="border-radius: 0 0 0 10px"
+            ></section>
+            <section
+              class="section-right"
+              style="border-radius: 0 0 10px 0"
+            ></section>
           </section>
         </section>
       </div>
       <form>
         <select id="voiceSelect"></select>
-        <input id="voiceInput" value="Chris made me say it!" />
-        <button type="submit" id="speakButton">Speak</button>
+        <input id="voiceInput" value="Chris made me say it!" style="display: none;"/>
+        <button type="submit" id="speakButton" style="visibility: hidden;">Speak</button>
       </form>
     </main>
     <script src="keyboard.42f64f1b.js"></script>
-    <script>
-    
-    </script>
+    <script></script>
   </body>
 </html>
