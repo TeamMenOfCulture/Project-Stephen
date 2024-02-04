@@ -55438,6 +55438,37 @@ parcelRequire = (function (e, r, t, n) {
             // Option3 = reply3;
           }
         }
+        // Your JavaScript code goes here
+        const promptContainer = document.querySelector(".prompt");
+        const button1 = document.querySelector("#btn1");
+        const button2 = document.querySelector("#btn2");
+
+        window.SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.addEventListener("result", (e) => {
+          const text = Array.from(e.results)
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
+
+          // Update the content of the promptContainer with the spoken text
+          console.log(text);
+          promptContainer.textContent = text;
+        });
+
+        recognition.start();
+        recognition.addEventListener("speechend", () => {
+          recognition.abort();
+          console.log("Audio capturing ended");
+          generateContent();
+          promptContainer.textContent = "";
+          setTimeout(function () {
+            recognition.start();
+          }, 400);
+        });
+
         const SpeechSynthesisUtterance =
           window.webkitSpeechSynthesisUtterance ||
           window.mozSpeechSynthesisUtterance ||
@@ -55470,7 +55501,7 @@ parcelRequire = (function (e, r, t, n) {
         };
         async function generateContent() {
           const prompt = document.getElementById("prompt").textContent;
-          console.log(prompt);
+          console.log("The prompt: ", prompt);
           try {
             const response = await fetch("http://localhost:8080/generate", {
               method: "POST",
@@ -55592,6 +55623,11 @@ parcelRequire = (function (e, r, t, n) {
               1 === e.length)
             ) {
               const n = document.querySelector(".output");
+              if (e.length === 1) {
+                let speak = new SpeechSynthesisUtterance(voiceInput.value);
+                speak.voice = voices[voiceSelect.value];
+                window.speechSynthesis.speak(speak);
+              }
               return (
                 "Delete" === e[0]
                   ? (n.value = n.value.slice(0, -1))

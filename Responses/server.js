@@ -19,9 +19,7 @@ async function run(prompt) {
   try {
     const result = await model.generateContent(initialText + prompt);
     const response = await result.response;
-    console.log(response)
     const text = await response.text(); // Await here
-    console.log(text)
     return text;
   } catch (error) {
     return "404 Not Found";
@@ -29,18 +27,13 @@ async function run(prompt) {
 }
 // const regex = /'([^']*)'/g;
 
-
-
 app.post("/generate", async (req, res) => {
   try {
     let ans = await run(req.body.prompt);
-    console.log(ans)
+    console.log(ans);
     // const replies = ans.match(regex);
-    
+
     // Find positions of apostrophes
-    
-
-
 
     // const reply1 = replies[0];
     // const reply2 = replies[1];
