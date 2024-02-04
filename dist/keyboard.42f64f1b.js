@@ -3,6 +3,11 @@ let Option2 = "Loading..";
 let Option3 = "Loading...";
 let reply1, reply2, reply3;
 let reloadingAns = false;
+let firstTime = true;
+const form = document.querySelector("form"),
+  voiceSelect = document.getElementById("voiceSelect"),
+  voiceInput = document.querySelector(".output");
+let voices;
 parcelRequire = (function (e, r, t, n) {
   var i,
     o = "function" == typeof parcelRequire && parcelRequire,
@@ -2120,8 +2125,8 @@ parcelRequire = (function (e, r, t, n) {
           for (let a = t.length - 1; a >= 0; a--) {
             const e = t[a],
               n = e.inputs;
-            console.log(outputs);
-            console.log(outputs.length);
+            // console.log(outputs);
+            // console.log(outputs.length);
             for (let t = 0; t < e.outputs.length; t++)
               if (i[e.outputs[t].id]) {
                 for (const t in n) (i[n[t].id] = !0), (s[e.id] = !0);
@@ -55418,18 +55423,18 @@ parcelRequire = (function (e, r, t, n) {
           const optionElements = document.getElementsByClassName("reply");
           // Assuming there are at least three elements with the class "reply" in your HTML
           if (optionElements.length) {
-            console.log(optionElements[0].innerText);
-            console.log(optionElements[1].innerText);
-            if (optionElements[0].innerText === "Loading.") {
-              optionElements[0].innerText = reply1;
+            // console.log(optionElements[0].innerText);
+            // console.log(optionElements[1].innerText);
+            if (optionElements[0].innerHTML === "Loading.") {
+              optionElements[0].innerHTML = reply1;
               Option1 = reply1;
             }
-            if (optionElements[1].innerText === "Loading..") {
-              optionElements[1].innerText = reply2;
+            if (optionElements[1].innerHTML === "Loading..") {
+              optionElements[1].innerHTML = reply2;
               Option1 = reply1;
             }
-            if (optionElements[2].innerText === "Loading...") {
-              optionElements[2].innerText = reply3;
+            if (optionElements[2].innerHTML === "Loading...") {
+              optionElements[2].innerHTML = reply3;
               Option3 = reply1;
             }
             // optionElements[1].innerText = reply2;
@@ -55438,17 +55443,47 @@ parcelRequire = (function (e, r, t, n) {
             // Option3 = reply3;
           }
         }
+        // Your JavaScript code goes here
+        const promptContainer = document.querySelector(".prompt");
+        const button1 = document.querySelector("#btn1");
+        const button2 = document.querySelector("#btn2");
+
+        window.SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.addEventListener("result", (e) => {
+          const text = Array.from(e.results)
+            .map((result) => result[0])
+            .map((result) => result.transcript)
+            .join("");
+
+          // Update the content of the promptContainer with the spoken text
+          console.log(text);
+          promptContainer.textContent = text;
+        });
+        if (firstTime) {
+          recognition.start();
+          firstTime = false;
+        }
+        recognition.addEventListener("speechend", async () => {
+          recognition.abort();
+          console.log("Audio capturing ended");
+          if (promptContainer.textContent !== "") {
+            await generateContent();
+          }
+          promptContainer.textContent = "";
+          setTimeout(function () {
+            recognition.start();
+          }, 1000);
+        });
+        // ---------------------------------------------------------------------------------
         const SpeechSynthesisUtterance =
           window.webkitSpeechSynthesisUtterance ||
           window.mozSpeechSynthesisUtterance ||
           window.msSpeechSynthesisUtterance ||
           window.oSpeechSynthesisUtterance ||
           window.SpeechSynthesisUtterance;
-        const form = document.querySelector("form"),
-          voiceSelect = document.getElementById("voiceSelect"),
-          voiceInput = document.querySelector(".output");
-        let voices;
-        console.log(voiceSelect);
 
         if (SpeechSynthesisUtterance !== undefined) {
           window.speechSynthesis.onvoiceschanged = () => {
@@ -55470,7 +55505,7 @@ parcelRequire = (function (e, r, t, n) {
         };
         async function generateContent() {
           const prompt = document.getElementById("prompt").textContent;
-          console.log(prompt);
+          console.log("The prompt: ", prompt);
           try {
             const response = await fetch("http://localhost:8080/generate", {
               method: "POST",
@@ -55484,7 +55519,7 @@ parcelRequire = (function (e, r, t, n) {
 
             const apostrophePositions = [];
             for (let i = 0; i < result.length; i++) {
-              if (result[i] === "'") {
+              if (result[i] === "$") {
                 apostrophePositions.push(i);
               }
             }
@@ -55503,9 +55538,9 @@ parcelRequire = (function (e, r, t, n) {
               apostrophePositions[5]
             );
 
-            console.log(reply1);
-            console.log(reply2);
-            console.log(reply3);
+            // console.log(reply1);
+            // console.log(reply2);
+            // console.log(reply3);
             reloadingAns = true;
             // let replies[] = {reply1, reply2, reply3}
             // document.getElementById("answer").innerText = result;
@@ -55530,7 +55565,7 @@ parcelRequire = (function (e, r, t, n) {
           if (reloadingAns) {
             await updateOptions(reply1, reply2, reply3);
           }
-        }, 3000);
+        }, 1000);
         // ----------------------------------------------------------------------------------------------
         let pElementNum = 1;
         exports.initialLetters = e;
@@ -55592,6 +55627,13 @@ parcelRequire = (function (e, r, t, n) {
               1 === e.length)
             ) {
               const n = document.querySelector(".output");
+              const speakButton = document.getElementById("speakButton");
+              if (e.length === 1) {
+                let speak = new SpeechSynthesisUtterance(n.value);
+                speak.voice = voices[voiceSelect.value];
+                window.speechSynthesis.speak(speak);
+                speakButton.click();
+              }
               return (
                 "Delete" === e[0]
                   ? (n.value = n.value.slice(0, -1))
